@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FootballInfoApp.Domain
 {
@@ -10,6 +11,8 @@ namespace FootballInfoApp.Domain
 
           public int CountryId { get; set; }
 
-          public Country Country { get; set; }
+          public virtual Country Country { get; set; }
+
+          public virtual ICollection<Match> Matches { get; set; }
      }
 }

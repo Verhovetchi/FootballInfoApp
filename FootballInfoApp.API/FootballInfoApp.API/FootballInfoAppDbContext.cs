@@ -1,9 +1,9 @@
 ﻿using FootballInfoApp.Domain;
 using FootballInfoApp.Domain.Auth;
-using Microsoft.EntityFrameworkCore;
-using FootballInfoApp.Domain.EFMapping;
 using FootballInfoApp.Domain.EFMapping.Schemas;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace FootballInfoApp.API
 {
@@ -14,11 +14,12 @@ namespace FootballInfoApp.API
 
           }
 
+          //public DbSet<Flag> Flags { get; set; }
+          //public DbSet<Logo> Logos { get; set; }
+
           public DbSet<Coach> Coaches { get; set; }
           public DbSet<Country> Countries { get; set; }
-          public DbSet<Flag> Flags { get; set; }
           public DbSet<League> Leagues { get; set; }
-          public DbSet<Logo> Logos { get; set; }
           public DbSet<Match> Matches { get; set; }
           public DbSet<Player> Players { get; set; }
           public DbSet<Position> Positions { get; set; }
@@ -30,8 +31,7 @@ namespace FootballInfoApp.API
           {
                base.OnModelCreating(modelBuilder);
 
-               var assembly = typeof(MatchConfig).Assembly;
-               modelBuilder.ApplyConfigurationsFromAssembly(assembly);
+               modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(FootballInfoAppDbContext)));
 
                ApplyIdentityMapConfiguration(modelBuilder);
           }

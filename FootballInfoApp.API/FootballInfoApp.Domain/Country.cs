@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FootballInfoApp.Domain
 {
@@ -8,8 +9,10 @@ namespace FootballInfoApp.Domain
           [MaxLength(40)]
           public string Name { get; set; }
 
-          public string FlagId { get; set; }
+          public string FlagImage { get; set; }
 
-          public Flag Flag { get; set; }
+          public ICollection<Player> Players { get; set; }
+          public ICollection<Coach> Coaches { get; set; }
+          public ICollection<League> Leagues { get; set; }
      }
 }

@@ -31,11 +31,11 @@ namespace FootballInfoApp.Domain
           [Required]
           public int CountryId { get; set; }
 
-          public int TeamId { get; set; }
+          public int? TeamId { get; set; }
 
-          public Team Team { get; set; }
-          public Position Position { get; set; }
-          public Country Country { get; set; }
+          public virtual Team Team { get; set; }
+          public virtual Position Position { get; set; }
+          public virtual Country Country { get; set; }
 
           public string Age(DateTime birthDate)
           {

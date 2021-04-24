@@ -35,8 +35,8 @@ namespace FootballInfoApp.Domain
 
           public string Golaverage(int goalsScored, int goalsReceived)
           {
-               GoalsReceived = goalsReceived;
                GoalsScored = goalsScored;
+               GoalsReceived = goalsReceived;
 
                int result = goalsScored - goalsReceived;
 
