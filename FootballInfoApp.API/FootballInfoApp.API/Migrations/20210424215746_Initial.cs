@@ -333,6 +333,7 @@ namespace FootballInfoApp.API.Migrations
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Height = table.Column<int>(type: "int", nullable: false),
                     Weight = table.Column<int>(type: "int", nullable: false),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PositionId = table.Column<int>(type: "int", nullable: false),
                     CountryId = table.Column<int>(type: "int", nullable: false),
                     TeamId = table.Column<int>(type: "int", nullable: true)

@@ -26,6 +26,9 @@ namespace FootballInfoApp.Domain
           public int Weight { get; set; }
 
           [Required]
+          public string Photo { get; set; }
+
+          [Required]
           public int PositionId { get; set; }
 
           [Required]
