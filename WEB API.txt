@@ -1,0 +1,39 @@
+REST(representational state transfer) - un protocol
+
+post-create, get-read, put-update, delete-delete, patch-partial update
+
+rest este stateless(nu tine starea)-transmitem parametrii noi singuri
+stateful(tine starea) lucreaza mai greu din motiv ca trebuie sa stie ceva parametric, dar 
+este problema cu load balancing(daca requestul se face la webservice-uri diferite, 
+se pierde datele parametrilor)
+
+rest este ca un contract intre aplicatii
+
+rest permite sa comunice cu backend-ul altei aplicatii
+
+controller este un class care primeste http request-urile
+
+Binding sources - surse de date din care primim parametrii(FromQuery(&), FromRoute(parametr), 
+FromForm(din forma),fromBody, FromHeader)
+
+model validation attributes- [CreditCard], [EmailAddress], [Phone], [Range],
+[RegularExpression], [Required], [StringLength]
+
+content negotiation(serverul si clientul se inteleg despre tipul formatului, limbajului)
+
+sunt 2 tipuri de route(routing conventional based, atribute routing- mai nou(decoram cu diferita
+atribute controlerul si endpointurile))
+
+HTTP context primim contextul requestului curent
+
+horisontal scale(), vertical scale
+
+Soap este stateful, utilizeaza pentru comunicare html, xml.
+Este mai sigur decat REST din motiv ca utilizeaza SSL
+
+ControllerBase n-are View in comparatie cu Controller
+
+swagger genereaza documentatia
+
+in proiectul meu am 3 layer-uri(prezentation layer(controller), bussines logic(service),
+data access(repository))

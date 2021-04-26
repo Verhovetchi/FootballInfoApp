@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace FootballInfoApp.Domain
 {
@@ -13,6 +14,7 @@ namespace FootballInfoApp.Domain
 
           public virtual Country Country { get; set; }
 
+          [JsonIgnore]
           public virtual ICollection<Match> Matches { get; set; }
      }
 }

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FootballInfoApp.Domain
 {
@@ -19,6 +18,9 @@ namespace FootballInfoApp.Domain
 
           [Required]
           public int TeamId { get; set; }
+
+          [Required]
+          public string Photo { get; set; }
 
           public virtual Team Team { get; set; }
           public virtual Country Country { get; set; }

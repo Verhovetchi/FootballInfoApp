@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballInfoApp.API.Migrations
 {
     [DbContext(typeof(FootballInfoAppDbContext))]
-    [Migration("20210424215746_Initial")]
+    [Migration("20210425174908_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -232,6 +232,10 @@ namespace FootballInfoApp.API.Migrations
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("Photo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
                         .IsRequired()

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace FootballInfoApp.Domain
 {
@@ -11,8 +12,13 @@ namespace FootballInfoApp.Domain
 
           public string FlagImage { get; set; }
 
+          [JsonIgnore]
           public ICollection<Player> Players { get; set; }
+
+          [JsonIgnore]
           public ICollection<Coach> Coaches { get; set; }
+
+          [JsonIgnore]
           public ICollection<League> Leagues { get; set; }
      }
 }

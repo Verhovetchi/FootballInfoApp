@@ -263,7 +263,8 @@ namespace FootballInfoApp.API.Migrations
                     Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     CountryId = table.Column<int>(type: "int", nullable: false),
-                    TeamId = table.Column<int>(type: "int", nullable: false)
+                    TeamId = table.Column<int>(type: "int", nullable: false),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

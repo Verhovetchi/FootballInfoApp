@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace FootballInfoApp.Domain
 {
@@ -13,9 +13,16 @@ namespace FootballInfoApp.Domain
 
           public virtual Stadium Stadium { get; set; }
 
+          [JsonIgnore]
           public virtual ICollection<Coach> Coaches { get; set; }
+
+          [JsonIgnore]
           public virtual ICollection<Player> Players { get; set; }
+
+          [JsonIgnore]
           public virtual ICollection<Match> HomeMatches { get; set; }
+
+          [JsonIgnore]
           public virtual ICollection<Match> AwayMatches { get; set; }
      }
 }

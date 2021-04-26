@@ -28,6 +28,12 @@ namespace FootballInfoApp.API.Repositories.Implementations
                return await _soccerInfoAppDbContext.Set<TEntity>().ToListAsync();
           }
 
+          public async Task<List<TEntity>> GetAllWithInclude<TEntity>(params Expression<Func<TEntity, object>>[] includeProperties) where TEntity : BaseEntity
+          {
+               var query = IncludeProperties(includeProperties);
+               return await query.ToListAsync();
+          }
+
           public async Task<TEntity> GetById<TEntity>(int id) where TEntity : BaseEntity
           {
                return await _soccerInfoAppDbContext.FindAsync<TEntity>(id);
@@ -44,18 +50,18 @@ namespace FootballInfoApp.API.Repositories.Implementations
                return await _soccerInfoAppDbContext.SaveChangesAsync() >= 0;
           }
 
-          public async Task<TEntity> Add<TEntity>(TEntity entity) where TEntity : BaseEntity
+          public TEntity Add<TEntity>(TEntity entity) where TEntity : BaseEntity
           {
                _soccerInfoAppDbContext.Set<TEntity>().Add(entity);
-               await _soccerInfoAppDbContext.SaveChangesAsync();
+               _soccerInfoAppDbContext.SaveChanges();
                return entity;
           }
 
-          public async Task<TEntity> Update<TEntity>(TEntity entity) where TEntity : BaseEntity
+          public TEntity Update<TEntity>(TEntity entity) where TEntity : BaseEntity
           {
                // In case entity is not tracked
                _soccerInfoAppDbContext.Entry(entity).State = EntityState.Modified;
-               await _soccerInfoAppDbContext.SaveChangesAsync();
+               _soccerInfoAppDbContext.SaveChanges();
                return entity;
           }
 
@@ -88,5 +94,6 @@ namespace FootballInfoApp.API.Repositories.Implementations
                }
                return entities;
           }
+
      }
 }

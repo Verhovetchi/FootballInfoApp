@@ -7,10 +7,11 @@ namespace FootballInfoApp.API.Services.Interfaces
 {
      public interface IPlayerService
      {
-          Task<ICollection<Player>> GetAllPlayers();
           Task<Player> GetPlayerById(int id);
+          Task<ICollection<Player>> GetAllPlayers();
+          Task<ICollection<Player>> GetAllPlayersFromTeam(int id);
           Task<Player> CreatePlayer(CreatePlayerDto playerDto);
           Task<Player> UpdatePlayerById(int id, UpdatePlayerDto playerDto);
-          Task<Player> DeletePlayerById(int id);
+          Task<bool> DeletePlayerById(int id);
      }
 }
