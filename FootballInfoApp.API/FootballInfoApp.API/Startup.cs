@@ -48,6 +48,7 @@ namespace FootballInfoApp.API
 
                services.AddScoped<IRepository, EFCoreRepository>();
                services.AddScoped<IPlayerService, PlayerService>();
+               services.AddScoped<ITeamService, TeamService>();
 
 
                services.AddAutoMapper(Assembly.GetExecutingAssembly());

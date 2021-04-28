@@ -9,19 +9,19 @@ namespace FootballInfoApp.API.Controllers
 {
      [Route("api/[controller]")]
      [ApiController]
-     public class SoccerController : ControllerBase
+     public class PlayerController : ControllerBase
      {
           private readonly IMapper _mapper;
           private readonly IPlayerService _playerService;
 
-          public SoccerController(IMapper mapper, IPlayerService playerService)
+          public PlayerController(IMapper mapper, IPlayerService playerService)
           {
                _mapper = mapper;
                _playerService = playerService;
           }
 
-          [HttpGet("/player/{id}")]
-          public async Task<IActionResult> GetPlayerById(int id)
+          [HttpGet("/players/{id}")]
+          public async Task<IActionResult> Get(int id)
           {
                var player = await _playerService.GetPlayerById(id);
 
@@ -35,27 +35,15 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/players")]
-          public async Task<IActionResult> GetPlayers()
+          public async Task<IActionResult> Get()
           {
                var players = await _playerService.GetAllPlayers();
                var playerDto = _mapper.Map<List<PlayerDto>>(players);
                return Ok(playerDto);
           }
 
-          [HttpGet("/playersByTeamId/{id}")]
-          public async Task<IActionResult> GetAllFromTeam(int id)
-          {
-               var players = await _playerService.GetAllPlayersFromTeam(id);
-
-               if (players.Count == 0)
-                    return NoContent();
-
-               var playerDto = _mapper.Map<List<PlayerDto>>(players);
-               return Ok(playerDto);
-          }
-
-          [HttpPost("/createPlayer")]
-          public async Task<IActionResult> CreatePlayer([FromBody] CreatePlayerDto dto)
+          [HttpPost("/players")]
+          public async Task<IActionResult> Add([FromBody] CreatePlayerDto dto)
           {
                var player = await _playerService.CreatePlayer(dto);
 
@@ -68,15 +56,15 @@ namespace FootballInfoApp.API.Controllers
           }
 
 
-          [HttpDelete("/deletePlayer/{id}")]
-          public async Task<IActionResult> DeletePlayer(int id)
+          [HttpDelete("/players/{id}")]
+          public async Task<IActionResult> Delete(int id)
           {
                await _playerService.DeletePlayerById(id);
                return NoContent();
           }
 
-          [HttpPatch("{id}")]
-          public async Task<IActionResult> UpdatePlayer(int id, [FromBody] UpdatePlayerDto updatedPlayer)
+          [HttpPatch("/players/{id}")]
+          public async Task<IActionResult> Patch(int id, [FromBody] UpdatePlayerDto updatedPlayer)
           {
                var player = await _playerService.UpdatePlayerById(id, updatedPlayer);
 
