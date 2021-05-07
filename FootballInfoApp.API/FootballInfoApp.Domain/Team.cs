@@ -10,8 +10,7 @@ namespace FootballInfoApp.Domain
 
           public int LeagueId { get; set; }
           public int StadiumId { get; set; }
-
-          public virtual Stadium Stadium { get; set; }
+          
 
           [JsonIgnore]
           public virtual ICollection<Coach> Coaches { get; set; }
@@ -24,5 +23,9 @@ namespace FootballInfoApp.Domain
 
           [JsonIgnore]
           public virtual ICollection<Match> AwayMatches { get; set; }
+
+          public virtual League League { get; set; }
+
+          public virtual Stadium Stadium { get; set; }
      }
 }

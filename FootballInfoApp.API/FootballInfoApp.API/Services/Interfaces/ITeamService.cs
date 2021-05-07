@@ -8,6 +8,7 @@ namespace FootballInfoApp.API.Services.Interfaces
 {
      public interface ITeamService
      {
+          Task<ICollection<Team>> GetAllTeams();
           Task<ICollection<Player>> GetAllPlayersFromTeam(int id);
           Task<ICollection<Player>> GetAllPlayersByPositionFromTeamId(int PositionId, int TeamId);
      }

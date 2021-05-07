@@ -20,6 +20,14 @@ namespace FootballInfoApp.API.Controllers
                _teamService = teamService;
           }
 
+          [HttpGet("/teams")]
+          public async Task<IActionResult> Get()
+          {
+               var teams = await _teamService.GetAllTeams();
+
+               return Ok(teams);
+          }
+
           [HttpGet("/{TeamId}/players")]
           public async Task<IActionResult> Get(int TeamId)
           {
@@ -32,7 +40,7 @@ namespace FootballInfoApp.API.Controllers
                return Ok(playerDto);
           }
 
-          [HttpGet("/{TeamId}/{PositionId}/players")]
+          [HttpGet("/{TeamId}/{PositionId}")]
           public async Task<IActionResult> Get(int TeamId, int PositionId)
           {
                var players = await _teamService.GetAllPlayersByPositionFromTeamId(PositionId, TeamId);

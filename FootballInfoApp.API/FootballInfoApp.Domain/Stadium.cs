@@ -15,6 +15,5 @@ namespace FootballInfoApp.Domain
           [Required]
           public DateTime MadeDate { get; set; }
 
-          public virtual Team Team { get; set; }
      }
 }

@@ -33,14 +33,12 @@ namespace FootballInfoApp.Domain
           public Team Team { get; set; }
           public League League { get; set; }
 
-          public string Golaverage(int goalsScored, int goalsReceived)
+          public int Golaverage
           {
-               GoalsScored = goalsScored;
-               GoalsReceived = goalsReceived;
-
-               int result = goalsScored - goalsReceived;
-
-               return result.ToString();
+               get
+               {
+                    return GoalsScored - GoalsReceived;
+               }
           }
-     }
+     } 
 }

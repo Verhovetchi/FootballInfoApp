@@ -35,5 +35,16 @@ namespace FootballInfoApp.API.Services.Implementations
 
                return result;
           }
+
+          public async Task<ICollection<Team>> GetAllTeams()
+          {
+               return await _repository.GetAllWithInclude<Team>(s => s.Stadium, c => c.Coaches, l=>l.League);
+          }
+
+          public async Task<ICollection<Coach>> GetCoach(int id)
+          {
+               return await _repository.GetAllWithInclude<Coach>(c => c.Country);
+          }
+
      }
 }
