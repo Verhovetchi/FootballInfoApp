@@ -4,14 +4,16 @@ using FootballInfoApp.API;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FootballInfoApp.API.Migrations
 {
     [DbContext(typeof(FootballInfoAppDbContext))]
-    partial class FootballInfoAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210507105316_Second")]
+    partial class Second
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

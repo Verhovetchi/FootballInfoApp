@@ -11,23 +11,27 @@ namespace FootballInfoApp.API.Controllers
 {
      [Route("api/[controller]")]
      [ApiController]
-     public class StadiumController : ControllerBase
+     public class CoachController : ControllerBase
      {
           private readonly IMapper _mapper;
-          private readonly IStadiumService _stadiumService;
+          private readonly ICoachService _coachService;
 
-          public StadiumController(IMapper mapper, IStadiumService stadiumService)
+          public CoachController(IMapper mapper, ICoachService coachService)
           {
                _mapper = mapper;
-               _stadiumService = stadiumService;
+               _coachService = coachService;
           }
 
-          [HttpGet("/stadium/{id}")]
+          [HttpGet("/coaches/{id}")]
           public async Task<IActionResult> Get(int id)
           {
-               var stadium = await _stadiumService.GetStadiumByTeamId(id);
+               var coach = await _coachService.GetCoachById(id);
 
-               return Ok(stadium);
+               if (coach == null)
+                    return NotFound();
+
+               return Ok(coach);
+
           }
      }
 }

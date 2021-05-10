@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FootballInfoApp.Domain
 {
@@ -18,6 +20,8 @@ namespace FootballInfoApp.Domain
 
           [Required]
           public int TeamId { get; set; }
+
+          public DateTime? BirthDate { get; set; }
 
           [Required]
           public string Photo { get; set; }

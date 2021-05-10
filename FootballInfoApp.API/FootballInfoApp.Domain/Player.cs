@@ -39,23 +39,5 @@ namespace FootballInfoApp.Domain
           public virtual Team Team { get; set; }
           public virtual Position Position { get; set; }
           public virtual Country Country { get; set; }
-
-          //public int Age(DateTime birthDate)
-          //{
-          //     BirthDate = birthDate;
-          //     DateTime now = DateTime.Now;
-
-          //     int year = now.Year - BirthDate.Year;
-          //     int month = now.Month - BirthDate.Month;
-          //     int day = now.Day - BirthDate.Day;
-
-          //     if ((month > 0) || (month == 0 && day >= 0))
-          //          return year;
-          //     else
-          //     {
-          //          year--;
-          //          return year;
-          //     }
-          //}
      }
 }

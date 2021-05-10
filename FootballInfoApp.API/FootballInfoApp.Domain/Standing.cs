@@ -30,15 +30,15 @@ namespace FootballInfoApp.Domain
           [Required]
           public int Points { get; set; }
 
-          public Team Team { get; set; }
-          public League League { get; set; }
+          public virtual Team Team { get; set; }
+          public virtual League League { get; set; }
 
-          public int Golaverage
-          {
-               get
-               {
-                    return GoalsScored - GoalsReceived;
-               }
-          }
+          //public int Golaverage
+          //{
+          //     get
+          //     {
+          //          return GoalsScored - GoalsReceived;
+          //     }
+          //}
      } 
 }

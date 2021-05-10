@@ -14,9 +14,6 @@ namespace FootballInfoApp.API
 
           }
 
-          //public DbSet<Flag> Flags { get; set; }
-          //public DbSet<Logo> Logos { get; set; }
-
           public DbSet<Coach> Coaches { get; set; }
           public DbSet<Country> Countries { get; set; }
           public DbSet<League> Leagues { get; set; }

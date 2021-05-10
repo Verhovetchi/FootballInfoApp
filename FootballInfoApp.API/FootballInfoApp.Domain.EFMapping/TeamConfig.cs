@@ -14,6 +14,7 @@ namespace FootballInfoApp.Domain.EFMapping
                //builder.HasOne(x => x.Logo)
                //     .WithOne(x => x.Team)
                //     .HasForeignKey<Logo>(x => x.Id);
+          
           }
      }
 }

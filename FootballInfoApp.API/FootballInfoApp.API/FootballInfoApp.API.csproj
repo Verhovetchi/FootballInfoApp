@@ -22,9 +22,5 @@
     <ProjectReference Include="..\FootballInfoApp.Domain\FootballInfoApp.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 
 </Project>

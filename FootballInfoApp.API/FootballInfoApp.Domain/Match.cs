@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace FootballInfoApp.Domain
 {
@@ -8,6 +9,9 @@ namespace FootballInfoApp.Domain
      {
           [Required]
           public int LeagueId { get; set; }
+
+          [Required]
+          public int Tour { get; set; }
 
           [Required]
           public int HomeTeamId { get; set; }
@@ -26,10 +30,16 @@ namespace FootballInfoApp.Domain
 
           public virtual League League { get; set; }
 
-          [NotMapped]
+          //[NotMapped]
+          [ForeignKey(nameof(HomeTeamId))]
+          [InverseProperty("HomeMatches")]
           public virtual Team HomeTeam { get; set; }
 
-          [NotMapped]
+          //[NotMapped]
+          [ForeignKey(nameof(AwayTeamId))]
+          [InverseProperty("AwayMatches")]
           public virtual Team AwayTeam { get; set; }
+
+          public string Video { get; set; }
      }
 }

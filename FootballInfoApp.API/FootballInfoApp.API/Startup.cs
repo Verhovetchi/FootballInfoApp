@@ -51,6 +51,8 @@ namespace FootballInfoApp.API
                services.AddScoped<ITeamService, TeamService>();
                services.AddScoped<IStandingService, StandingService>();
                services.AddScoped<IStadiumService, StadiumService>();
+               services.AddScoped<ICoachService, CoachService>();
+               services.AddScoped<IMatchService, MatchService>();
 
 
                services.AddAutoMapper(Assembly.GetExecutingAssembly());
