@@ -1,4 +1,5 @@
 ﻿using FootballInfoApp.API.Dtos.Players;
+using FootballInfoApp.API.Infrastructure.Exceptions;
 using FootballInfoApp.API.Repositories.Interfaces;
 using FootballInfoApp.API.Services.Interfaces;
 using FootballInfoApp.Domain;
@@ -43,7 +44,7 @@ namespace FootballInfoApp.API.Services.Implementations
           {
                if (await CheckIfPlayerNumberExists(playerDto.TeamId, playerDto.PlayNumber))
                {
-                    return null;
+                    throw new EntryAlreadyExistsException("A player with this play number already exists!!!");
                }
 
                var newPlayer = new Player

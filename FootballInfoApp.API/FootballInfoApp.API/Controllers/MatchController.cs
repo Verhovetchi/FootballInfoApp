@@ -31,7 +31,6 @@ namespace FootballInfoApp.API.Controllers
           public async Task<IActionResult> GetLastMatchByTeamId(int id)
           {
                var matches = await _matchService.GetLastMatchByTeamId(id);
-
                return Ok(matches);
           }
 

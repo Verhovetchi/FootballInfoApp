@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace FootballInfoApp.Domain
 {
@@ -18,6 +19,7 @@ namespace FootballInfoApp.Domain
           [Required]
           public string StadiumImage { get; set; }
 
+          [JsonIgnore]
           public virtual Team Team { get; set; }
      }
 }

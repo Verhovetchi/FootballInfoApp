@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using FootballInfoApp.API.Repositories.Interfaces;
 using FootballInfoApp.API.Services.Implementations;
 using FootballInfoApp.API.Repositories.Implementations;
+using FootballInfoApp.API.Infrastructure.Extensions;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace FootballInfoApp.API
 {
@@ -23,28 +26,26 @@ namespace FootballInfoApp.API
 
           public IConfiguration Configuration { get; }
 
-          // This method gets called by the runtime. Use this method to add services to the container.
           public void ConfigureServices(IServiceCollection services)
           {
-               services.AddControllers();
-
-               services.AddSwaggerGen();
-               
                services.AddDbContext<FootballInfoAppDbContext>(optionBuilder =>
                {
                     optionBuilder.UseSqlServer(Configuration.GetConnectionString("FootballInfoAppDbContext"));
+               });
+
+               services.AddControllers(options =>
+               {
+                    options.Filters.Add(new AuthorizeFilter());
                });
 
                services.AddIdentity<User, Role>(options =>
                {
                     options.Password.RequiredLength = 8;
                })
-               .AddEntityFrameworkStores<FootballInfoAppDbContext>();
+               .AddEntityFrameworkStores<FootballInfoAppDbContext>().AddDefaultTokenProviders();
 
-               //services.AddControllers(options =>
-               //{
-               //     options.Filters.Add(new AuthorizeFilter());
-               //});
+               var authOptions = services.ConfigureAuthOptions(Configuration);
+               services.AddJwtAuthentication(authOptions);
 
                services.AddScoped<IRepository, EFCoreRepository>();
                services.AddScoped<IPlayerService, PlayerService>();
@@ -53,12 +54,45 @@ namespace FootballInfoApp.API
                services.AddScoped<IStadiumService, StadiumService>();
                services.AddScoped<ICoachService, CoachService>();
                services.AddScoped<IMatchService, MatchService>();
-
+               services.AddScoped<INewService, NewService>();
+               services.AddScoped<ICountryService, CountryService>();
+               services.AddScoped<IUserService, UserService>();
+               services.AddHttpContextAccessor();
 
                services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+               services.AddSwaggerGen(c =>
+               {
+                    c.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                         Version = "v1",
+                         Title = "API",
+                    });
+                    var securitySchema = new OpenApiSecurityScheme
+                    {
+                         Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                         Name = "Authorization",
+                         In = ParameterLocation.Header,
+                         Type = SecuritySchemeType.Http,
+                         Scheme = "bearer",
+                         Reference = new OpenApiReference
+                         {
+                              Type = ReferenceType.SecurityScheme,
+                              Id = "Bearer"
+                         }
+                    };
+                    c.AddSecurityDefinition("Bearer", securitySchema);
+
+                    var securityRequirement = new OpenApiSecurityRequirement();
+                    securityRequirement.Add(securitySchema, new[] { "Bearer" });
+                    c.AddSecurityRequirement(securityRequirement);
+               });
+
+
+
+               
           }
 
-          // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
           public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
           {
                if (env.IsDevelopment())
@@ -75,13 +109,13 @@ namespace FootballInfoApp.API
 
                app.UseHttpsRedirection();
                
-
                app.UseRouting();
 
                app.UseStaticFiles();
                app.UseDefaultFiles();
 
                app.UseAuthorization();
+               app.UseAuthentication();
 
                app.UseCors(configurePolicy => configurePolicy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 

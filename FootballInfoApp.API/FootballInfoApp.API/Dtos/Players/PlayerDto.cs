@@ -14,7 +14,6 @@ namespace FootballInfoApp.API.Dtos.Players
           public DateTime BirthDate { get; set; }
           public string Photo { get; set; }
 
-
           public Position Position { get; set; }
           public Country Country { get; set; }
           public Team Team { get; set; }

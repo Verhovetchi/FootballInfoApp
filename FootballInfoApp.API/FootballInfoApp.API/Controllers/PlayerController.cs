@@ -58,7 +58,7 @@ namespace FootballInfoApp.API.Controllers
 
           [HttpDelete("/players/{id}")]
           public async Task<IActionResult> Delete(int id)
-          {
+         {
                await _playerService.DeletePlayerById(id);
                return NoContent();
           }

@@ -23,6 +23,7 @@ namespace FootballInfoApp.API
           public DbSet<Stadium> Stadiums { get; set; }
           public DbSet<Standing> Standings { get; set; }
           public DbSet<Team> Teams { get; set; }
+          public DbSet<New> News { get; set; }
 
           protected override void OnModelCreating(ModelBuilder modelBuilder)
           {
