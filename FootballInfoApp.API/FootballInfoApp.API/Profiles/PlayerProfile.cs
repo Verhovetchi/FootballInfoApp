@@ -9,6 +9,7 @@ namespace FootballInfoApp.API.Profiles
           public PlayerProfile()
           {
                CreateMap<Player, PlayerDto>();
+               CreateMap<Player, CreatePlayerDto>();
           }
      }
 }

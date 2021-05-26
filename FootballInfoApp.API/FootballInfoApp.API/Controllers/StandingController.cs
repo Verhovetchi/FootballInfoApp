@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FootballInfoApp.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ namespace FootballInfoApp.API.Controllers
 {
      [Route("api/[controller]")]
      [ApiController]
+     [Authorize]
      public class StandingController : ControllerBase
      {
           private readonly IMapper _mapper;
@@ -23,11 +25,21 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/standing")]
+          [AllowAnonymous]
           public async Task<IActionResult> Get()
           {
                var standing = await _standingService.Get();
 
                return Ok(standing);
+          }
+
+          [HttpGet("/standing/{teamId}")]
+          [AllowAnonymous]
+          public async Task<IActionResult> Get(int teamId)
+          {
+               var res = await _standingService.GetTeam(teamId);
+
+               return Ok(res);
           }
 
      }

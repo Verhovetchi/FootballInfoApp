@@ -8,8 +8,9 @@ namespace FootballInfoApp.API.Infrastructure.Models.User
 {
      public class UserRegistrerModel
      {
-          
+
           [Required]
+          [EmailAddress]
           public string Email { get; set; }
 
           [Required]

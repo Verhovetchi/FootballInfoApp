@@ -33,6 +33,8 @@ namespace FootballInfoApp.API
                     optionBuilder.UseSqlServer(Configuration.GetConnectionString("FootballInfoAppDbContext"));
                });
 
+               //services.AddControllers();
+
                services.AddControllers(options =>
                {
                     options.Filters.Add(new AuthorizeFilter());
@@ -87,10 +89,6 @@ namespace FootballInfoApp.API
                     securityRequirement.Add(securitySchema, new[] { "Bearer" });
                     c.AddSecurityRequirement(securityRequirement);
                });
-
-
-
-               
           }
 
           public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -114,8 +112,8 @@ namespace FootballInfoApp.API
                app.UseStaticFiles();
                app.UseDefaultFiles();
 
-               app.UseAuthorization();
                app.UseAuthentication();
+               app.UseAuthorization();
 
                app.UseCors(configurePolicy => configurePolicy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 

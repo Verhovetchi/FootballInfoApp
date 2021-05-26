@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FootballInfoApp.API.Dtos.Players;
 using FootballInfoApp.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace FootballInfoApp.API.Controllers
 {
      [Route("api/[controller]")]
      [ApiController]
+     [Authorize]
      public class TeamController : ControllerBase
      {
           private readonly IMapper _mapper;
@@ -21,6 +23,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/teams")]
+          [AllowAnonymous]
           public async Task<IActionResult> Get()
           {
                var teams = await _teamService.GetAllTeams();
@@ -29,6 +32,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/{TeamId}/players")]
+          [AllowAnonymous]
           public async Task<IActionResult> Get(int TeamId)
           {
                var players = await _teamService.GetAllPlayersFromTeam(TeamId);
@@ -41,6 +45,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/{TeamId}/{PositionId}")]
+          [AllowAnonymous]
           public async Task<IActionResult> Get(int TeamId, int PositionId)
           {
                var players = await _teamService.GetAllPlayersByPositionFromTeamId(PositionId, TeamId);

@@ -9,5 +9,7 @@ namespace FootballInfoApp.API.Services.Interfaces
      public interface IStandingService
      {
           Task<ICollection<Standing>> Get();
+
+          Task<Standing> GetTeam(int teamId);
      }
 }

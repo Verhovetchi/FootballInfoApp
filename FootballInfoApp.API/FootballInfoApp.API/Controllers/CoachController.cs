@@ -1,16 +1,14 @@
 ﻿using AutoMapper;
 using FootballInfoApp.API.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Controllers
 {
-     [Route("api/[controller]")]
+     [Authorize]
      [ApiController]
+     [Route("api/[controller]")]
      public class CoachController : ControllerBase
      {
           private readonly IMapper _mapper;
@@ -23,6 +21,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/coaches/{id}")]
+          [AllowAnonymous]
           public async Task<IActionResult> Get(int id)
           {
                var coach = await _coachService.GetCoachById(id);

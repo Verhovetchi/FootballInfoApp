@@ -17,11 +17,19 @@ namespace FootballInfoApp.API.Services.Implementations
                _repository = repository;
           }
 
+          public async Task<Standing> GetTeam(int teamId)
+          {
+               return await _repository.GetById<Standing>(teamId);
+          }
+
           async Task<ICollection<Standing>> IStandingService.Get()
           {
                var res = await _repository.GetAllWithInclude<Standing>(t => t.Team);
+               var result = res.OrderByDescending(p=>p.Points).ToList();
 
-               return res;
+               return result;
           }
+
+          
      }
 }

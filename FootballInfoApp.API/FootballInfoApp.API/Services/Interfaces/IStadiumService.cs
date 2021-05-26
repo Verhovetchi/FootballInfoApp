@@ -9,5 +9,6 @@ namespace FootballInfoApp.API.Services.Interfaces
      public interface IStadiumService
      {
           Task<Stadium> GetStadiumByTeamId(int TeamId);
+          Task<ICollection<Stadium>> GetAllStadiums();
      }
 }

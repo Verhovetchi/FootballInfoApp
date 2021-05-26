@@ -1,13 +1,15 @@
 ﻿using AutoMapper;
+using FootballInfoApp.API.Dtos.Matches;
 using FootballInfoApp.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Controllers
 {
-     [Route("api/[controller]")]
      [ApiController]
+     [Route("api/[controller]")]
      public class MatchController : ControllerBase
      {
           private readonly IMapper _mapper;
@@ -19,6 +21,7 @@ namespace FootballInfoApp.API.Controllers
                _matchService = matchService;
           }
 
+          [AllowAnonymous]
           [HttpGet("/match/{id}")]
           public async Task<IActionResult> GetMatchById(int id)
           {
@@ -27,6 +30,7 @@ namespace FootballInfoApp.API.Controllers
                return Ok(matches);
           }
 
+          [AllowAnonymous]
           [HttpGet("/last/{id}")]
           public async Task<IActionResult> GetLastMatchByTeamId(int id)
           {
@@ -35,6 +39,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/next/{id}")]
+          [AllowAnonymous]
           public async Task<IActionResult> GetNextMatchByTeamId(int id)
           {
                var matches = await _matchService.GetNextMatchByTeamId(id);
@@ -43,6 +48,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/matches/{TeamId}/{flag}")]
+          [AllowAnonymous]
           public async Task<IActionResult> GetMatchesByTeamId(int TeamId, string flag)
           {
                var matches = await _matchService.GetAllMatches();
@@ -63,6 +69,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/form/{id}")]
+          [AllowAnonymous]
           public async Task<IActionResult> GetForm(int id)
           {
                var matches = await _matchService.GetMatchesByTeamId(id);
@@ -76,12 +83,43 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/matches")]
+          [Authorize(Roles = "admin")]
           public async Task<IActionResult> GetAllMatches()
           {
                var matches = await _matchService.GetAllMatches();
 
                return Ok(matches);
+          }
 
+          [HttpGet("/nonPlayedMatches")]
+          [Authorize]
+          public async Task<IActionResult> GetAllNonPlayedGames()
+          {
+               var matches = await _matchService.GetAllNonPlayedMatches();
+
+               return Ok(matches.ToList());
+          }
+
+          [HttpPost("/matches")]
+          [Authorize]
+          public async Task<IActionResult> Add([FromBody] CreateMatchDto dto)
+          {
+               var match = await _matchService.CreateMatch(dto);
+
+               _mapper.Map<MatchDto>(match);
+
+               return Ok(match);
+          }
+
+          [HttpPatch("/matches/{id}")]
+          [Authorize]
+          public async Task<IActionResult> Patch(int id, [FromBody] UpdateMatchDto updatedMatch)
+          {
+               var match = await _matchService.UpdateMatchById(id, updatedMatch);
+
+               var result = _mapper.Map<MatchDto>(match);
+
+               return Ok(result);
           }
      }
 }

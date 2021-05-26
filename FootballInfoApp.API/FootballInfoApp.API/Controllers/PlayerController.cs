@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FootballInfoApp.API.Dtos.Players;
 using FootballInfoApp.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/players/{id}")]
+          [AllowAnonymous]
+          //[Authorize(Roles = "Admin")]
           public async Task<IActionResult> Get(int id)
           {
                var player = await _playerService.GetPlayerById(id);
@@ -35,6 +38,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/players")]
+          [Authorize(Roles = "Client")]
           public async Task<IActionResult> Get()
           {
                var players = await _playerService.GetAllPlayers();
@@ -43,6 +47,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpPost("/players")]
+          [Authorize(Roles = "Admin")]
           public async Task<IActionResult> Add([FromBody] CreatePlayerDto dto)
           {
                var player = await _playerService.CreatePlayer(dto);
@@ -57,13 +62,15 @@ namespace FootballInfoApp.API.Controllers
 
 
           [HttpDelete("/players/{id}")]
+          [Authorize]
           public async Task<IActionResult> Delete(int id)
-         {
+          {
                await _playerService.DeletePlayerById(id);
                return NoContent();
           }
 
           [HttpPatch("/players/{id}")]
+          [Authorize]
           public async Task<IActionResult> Patch(int id, [FromBody] UpdatePlayerDto updatedPlayer)
           {
                var player = await _playerService.UpdatePlayerById(id, updatedPlayer);

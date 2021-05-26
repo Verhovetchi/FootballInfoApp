@@ -17,6 +17,11 @@ namespace FootballInfoApp.API.Services.Implementations
                _repository = repository;
           }
 
+          public async Task<ICollection<Stadium>> GetAllStadiums()
+          {
+               return await _repository.GetAll<Stadium>();
+          }
+
           public Task<Stadium> GetStadiumByTeamId(int TeamId)
           {
                var stadium = _repository.GetById<Stadium>(TeamId);

@@ -1,9 +1,8 @@
-﻿using FootballInfoApp.API.Services.Interfaces;
+﻿using FootballInfoApp.API.Dtos.News;
+using FootballInfoApp.API.Services.Interfaces;
 using FootballInfoApp.Domain;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,6 +10,7 @@ namespace FootballInfoApp.API.Controllers
 {
      [Route("api/[controller]")]
      [ApiController]
+     [Authorize]
      public class NewController : ControllerBase
      {
           private readonly INewService _newService;
@@ -21,6 +21,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/news/{pageId}")]
+          [AllowAnonymous]
           public async Task<IActionResult> GetPageById(int pageId = 1)
           {
                int pageSize = 5;
@@ -36,10 +37,49 @@ namespace FootballInfoApp.API.Controllers
                return Ok(ivm);
           }
 
+          [HttpGet("/news")]
+          [Authorize]
+          public async Task<IActionResult> GetAll()
+          {
+               var result = await _newService.GetAll();
+
+               return Ok(result.ToList());
+          }
+
+
           [HttpGet("/new/{newId}")]
+          [AllowAnonymous]
           public async Task<IActionResult> GetNewById(int newId)
           {
                return Ok(await _newService.GetNewById(newId));
           }
+
+          [HttpPost("/news")]
+          [Authorize]
+          public async Task<IActionResult> Add([FromBody] CreateNewDto dto)
+          {
+               var _new = await _newService.CreateNew(dto);
+
+               return Ok(_new);
+          }
+
+          [HttpPatch("/news/{id}")]
+          [Authorize]
+          public async Task<IActionResult> Patch(int id, [FromBody] UpdateNewDto updatedNew)
+          {
+               var _new = await _newService.UpdateNewById(id, updatedNew);
+
+               return Ok(_new);
+          }
+
+          [HttpDelete("/news/{id}")]
+          [Authorize]
+          public async Task<IActionResult> Delete(int id)
+          {
+               await _newService.DeleteNewById(id);
+               return NoContent();
+          }
+
+
      }
 }
