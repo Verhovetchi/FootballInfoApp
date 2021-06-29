@@ -11,11 +11,11 @@ namespace FootballInfoApp.API.Controllers
      [Route("api/[controller]")]
      [ApiController]
      [Authorize]
-     public class NewController : ControllerBase
+     public class NewsController : ControllerBase
      {
-          private readonly INewService _newService;
+          private readonly INewsService _newService;
 
-          public NewController(INewService newService)
+          public NewsController(INewsService newService)
           {
                _newService = newService;
           }
@@ -38,7 +38,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/news")]
-          [Authorize]
+          [Authorize(Roles = "Admin")]
           public async Task<IActionResult> GetAll()
           {
                var result = await _newService.GetAll();
@@ -55,7 +55,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpPost("/news")]
-          [Authorize]
+          [Authorize(Roles = "Admin")]
           public async Task<IActionResult> Add([FromBody] CreateNewDto dto)
           {
                var _new = await _newService.CreateNew(dto);
@@ -64,7 +64,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpPatch("/news/{id}")]
-          [Authorize]
+          [Authorize(Roles = "Admin")]
           public async Task<IActionResult> Patch(int id, [FromBody] UpdateNewDto updatedNew)
           {
                var _new = await _newService.UpdateNewById(id, updatedNew);
@@ -73,7 +73,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpDelete("/news/{id}")]
-          [Authorize]
+          [Authorize(Roles = "Admin")]
           public async Task<IActionResult> Delete(int id)
           {
                await _newService.DeleteNewById(id);

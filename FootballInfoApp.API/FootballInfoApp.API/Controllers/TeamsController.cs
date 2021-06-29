@@ -11,12 +11,12 @@ namespace FootballInfoApp.API.Controllers
      [Route("api/[controller]")]
      [ApiController]
      [Authorize]
-     public class TeamController : ControllerBase
+     public class TeamsController : ControllerBase
      {
           private readonly IMapper _mapper;
-          private readonly ITeamService _teamService;
+          private readonly ITeamsService _teamService;
 
-          public TeamController(IMapper mapper, ITeamService teamService)
+          public TeamsController(IMapper mapper, ITeamsService teamService)
           {
                _mapper = mapper;
                _teamService = teamService;

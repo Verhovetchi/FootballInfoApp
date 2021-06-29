@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Services.Interfaces
 {
-     public interface IStadiumService
+     public interface IStadiumsService
      {
           Task<Stadium> GetStadiumByTeamId(int TeamId);
           Task<ICollection<Stadium>> GetAllStadiums();

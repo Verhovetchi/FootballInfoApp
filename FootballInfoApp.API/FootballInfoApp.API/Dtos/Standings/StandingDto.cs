@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FootballInfoApp.Domain;
+using System.ComponentModel.DataAnnotations;
 
-namespace FootballInfoApp.Domain
+namespace FootballInfoApp.API.Dtos.Standings
 {
-     public class Standing : BaseEntity
+     public class StandingDto
      {
           [Required]
           public int TeamId { get; set; }
@@ -32,5 +33,5 @@ namespace FootballInfoApp.Domain
 
           public virtual Team Team { get; set; }
           public virtual League League { get; set; }
-     } 
+     }
 }

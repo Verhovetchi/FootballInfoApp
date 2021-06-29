@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Services.Implementations
 {
-     public class MatchService : IMatchService
+     public class MatchesService : IMatchesService
      {
           private readonly IRepository _repository;
-          private readonly IStandingService _standing;
+          private readonly IStandingsService _standing;
 
-          public MatchService(IRepository repository, IStandingService standing)
+          public MatchesService(IRepository repository, IStandingsService standing)
           {
                _repository = repository;
                _standing = standing;

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Services.Implementations
 {
-     public class StadiumService : IStadiumService
+     public class StadiumsService : IStadiumsService
      {
           private readonly IRepository _repository;
 
-          public StadiumService(IRepository repository)
+          public StadiumsService(IRepository repository)
           {
                _repository = repository;
           }

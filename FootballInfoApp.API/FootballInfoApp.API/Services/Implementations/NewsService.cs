@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Services.Implementations
 {
-     public class NewService : INewService
+     public class NewsService : INewsService
      {
           private readonly IRepository _repository;
 
-          public NewService(IRepository repository)
+          public NewsService(IRepository repository)
           {
                _repository = repository;
           }

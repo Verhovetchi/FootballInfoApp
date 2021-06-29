@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FootballInfoApp.API.Dtos.Standings;
 using FootballInfoApp.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,12 +14,12 @@ namespace FootballInfoApp.API.Controllers
      [Route("api/[controller]")]
      [ApiController]
      [Authorize]
-     public class StandingController : ControllerBase
+     public class StandingsController : ControllerBase
      {
           private readonly IMapper _mapper;
-          private readonly IStandingService _standingService;
+          private readonly IStandingsService _standingService;
 
-          public StandingController(IMapper mapper, IStandingService standingService)
+          public StandingsController(IMapper mapper, IStandingsService standingService)
           {
                _mapper = mapper;
                _standingService = standingService;
@@ -26,20 +27,24 @@ namespace FootballInfoApp.API.Controllers
 
           [HttpGet("/standing")]
           [AllowAnonymous]
-          public async Task<IActionResult> Get()
+          public async Task<List<StandingDto>> Get()
           {
                var standing = await _standingService.Get();
 
-               return Ok(standing);
+               var standingDto = _mapper.Map<List<StandingDto>>(standing);
+
+               return standingDto;
           }
 
           [HttpGet("/standing/{teamId}")]
           [AllowAnonymous]
-          public async Task<IActionResult> Get(int teamId)
+          public async Task<StandingDto> Get(int teamId)
           {
-               var res = await _standingService.GetTeam(teamId);
+               var standing = await _standingService.GetTeam(teamId);
 
-               return Ok(res);
+               var standingDto = _mapper.Map<StandingDto>(standing);
+
+               return standingDto;
           }
 
      }

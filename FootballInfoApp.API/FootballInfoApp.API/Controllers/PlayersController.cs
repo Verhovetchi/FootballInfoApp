@@ -13,9 +13,9 @@ namespace FootballInfoApp.API.Controllers
      public class PlayerController : ControllerBase
      {
           private readonly IMapper _mapper;
-          private readonly IPlayerService _playerService;
+          private readonly IPlayersService _playerService;
 
-          public PlayerController(IMapper mapper, IPlayerService playerService)
+          public PlayerController(IMapper mapper, IPlayersService playerService)
           {
                _mapper = mapper;
                _playerService = playerService;
@@ -23,7 +23,6 @@ namespace FootballInfoApp.API.Controllers
 
           [HttpGet("/players/{id}")]
           [AllowAnonymous]
-          //[Authorize(Roles = "Admin")]
           public async Task<IActionResult> Get(int id)
           {
                var player = await _playerService.GetPlayerById(id);
@@ -38,7 +37,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpGet("/players")]
-          [Authorize(Roles = "Client")]
+          //[Authorize(Roles = "Admin")]
           public async Task<IActionResult> Get()
           {
                var players = await _playerService.GetAllPlayers();
@@ -62,7 +61,7 @@ namespace FootballInfoApp.API.Controllers
 
 
           [HttpDelete("/players/{id}")]
-          [Authorize]
+          [Authorize(Roles = "Admin")]
           public async Task<IActionResult> Delete(int id)
           {
                await _playerService.DeletePlayerById(id);
@@ -70,7 +69,7 @@ namespace FootballInfoApp.API.Controllers
           }
 
           [HttpPatch("/players/{id}")]
-          [Authorize]
+          [Authorize(Roles = "Admin")]
           public async Task<IActionResult> Patch(int id, [FromBody] UpdatePlayerDto updatedPlayer)
           {
                var player = await _playerService.UpdatePlayerById(id, updatedPlayer);

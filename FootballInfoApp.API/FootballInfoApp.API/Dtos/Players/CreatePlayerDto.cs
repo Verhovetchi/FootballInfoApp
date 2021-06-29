@@ -26,7 +26,7 @@ namespace FootballInfoApp.API.Dtos.Players
           public int Height { get; set; }
 
           [Required]
-          [Range(50, 100, ErrorMessage = "Height can't accept this value!")]
+          [Range(50, 100, ErrorMessage = "Weight can't accept this value!")]
           public int Weight { get; set; }
 
           [Required]

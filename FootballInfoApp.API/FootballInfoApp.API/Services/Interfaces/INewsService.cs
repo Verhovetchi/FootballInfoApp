@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Services.Interfaces
 {
-     public interface INewService
+     public interface INewsService
      {
           Task<New> GetNewById(int id);
           Task<ICollection<New>> GetAll();

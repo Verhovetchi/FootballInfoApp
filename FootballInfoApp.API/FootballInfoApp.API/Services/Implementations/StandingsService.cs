@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Services.Implementations
 {
-     public class StandingService : IStandingService
+     public class StandingsService : IStandingsService
      {
           private readonly IRepository _repository;
 
-          public StandingService(IRepository repository)
+          public StandingsService(IRepository repository)
           {
                _repository = repository;
           }
@@ -22,7 +22,7 @@ namespace FootballInfoApp.API.Services.Implementations
                return await _repository.GetById<Standing>(teamId);
           }
 
-          async Task<ICollection<Standing>> IStandingService.Get()
+          async Task<ICollection<Standing>> IStandingsService.Get()
           {
                var res = await _repository.GetAllWithInclude<Standing>(t => t.Team);
                var result = res.OrderByDescending(p=>p.Points).ToList();

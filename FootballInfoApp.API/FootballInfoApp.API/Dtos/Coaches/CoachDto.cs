@@ -1,9 +1,10 @@
 ﻿using System;
+using FootballInfoApp.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace FootballInfoApp.Domain
+namespace FootballInfoApp.API.Dtos.Coaches
 {
-     public class Coach : BaseEntity
+     public class CoachDto
      {
           [Required]
           [MaxLength(25)]

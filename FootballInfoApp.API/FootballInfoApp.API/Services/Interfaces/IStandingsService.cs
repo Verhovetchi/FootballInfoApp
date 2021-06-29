@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Services.Interfaces
 {
-     public interface ICoachService
+     public interface IStandingsService
      {
-          Task<Coach> GetCoachById(int id);
+          Task<ICollection<Standing>> Get();
 
+          Task<Standing> GetTeam(int teamId);
      }
 }

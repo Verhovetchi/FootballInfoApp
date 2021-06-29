@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Services.Implementations
 {
-     public class PlayerService : IPlayerService
+     public class PlayersService : IPlayersService
      {
           private readonly IRepository _repository;
 
-          public PlayerService(IRepository repository)
+          public PlayersService(IRepository repository)
           {
                _repository = repository;
           }

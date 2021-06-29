@@ -5,7 +5,7 @@ using FootballInfoApp.API.Dtos.Players;
 
 namespace FootballInfoApp.API.Services.Interfaces
 {
-     public interface IPlayerService
+     public interface IPlayersService
      {
           Task<Player> GetPlayerById(int id);
           Task<ICollection<Player>> GetAllPlayers();

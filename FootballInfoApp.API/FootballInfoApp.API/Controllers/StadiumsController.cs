@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
+using FootballInfoApp.API.Dtos.Stadiums;
 using FootballInfoApp.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Controllers
@@ -13,33 +12,37 @@ namespace FootballInfoApp.API.Controllers
      [Route("api/[controller]")]
      [ApiController]
      [Authorize]
-     public class StadiumController : ControllerBase
+     public class StadiumsController : ControllerBase
      {
           private readonly IMapper _mapper;
-          private readonly IStadiumService _stadiumService;
+          private readonly IStadiumsService _stadiumService;
 
-          public StadiumController(IMapper mapper, IStadiumService stadiumService)
+          public StadiumsController(IMapper mapper, IStadiumsService stadiumService)
           {
                _mapper = mapper;
                _stadiumService = stadiumService;
           }
 
-          [HttpGet("/stadium/{id}")]
+          [HttpGet("{id}")]
           [AllowAnonymous]
-          public async Task<IActionResult> Get(int id)
+          public async Task<StadiumDto> Get(int id)
           {
                var stadium = await _stadiumService.GetStadiumByTeamId(id);
 
-               return Ok(stadium);
+               var stadiumDto = _mapper.Map<StadiumDto>(stadium);
+
+               return stadiumDto;
           }
 
-          [HttpGet("/stadiums")]
+          [HttpGet]
           [AllowAnonymous]
-          public async Task<IActionResult> Get()
+          public async Task<IEnumerable<StadiumDto>> Get()
           {
                var stadium = await _stadiumService.GetAllStadiums();
 
-               return Ok(stadium);
+               var stadiumDto = _mapper.Map<List<StadiumDto>>(stadium);
+
+               return stadiumDto;
           }
      }
 }

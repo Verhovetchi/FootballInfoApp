@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Services.Interfaces
 {
-     public interface ICountryService
+     public interface ICountriesService
      {
           Task<ICollection<Country>> GetAll();
      }

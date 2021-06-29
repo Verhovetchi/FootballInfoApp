@@ -50,14 +50,14 @@ namespace FootballInfoApp.API
                services.AddJwtAuthentication(authOptions);
 
                services.AddScoped<IRepository, EFCoreRepository>();
-               services.AddScoped<IPlayerService, PlayerService>();
-               services.AddScoped<ITeamService, TeamService>();
-               services.AddScoped<IStandingService, StandingService>();
-               services.AddScoped<IStadiumService, StadiumService>();
-               services.AddScoped<ICoachService, CoachService>();
-               services.AddScoped<IMatchService, MatchService>();
-               services.AddScoped<INewService, NewService>();
-               services.AddScoped<ICountryService, CountryService>();
+               services.AddScoped<IPlayersService, PlayersService>();
+               services.AddScoped<ITeamsService, TeamsService>();
+               services.AddScoped<IStandingsService, StandingsService>();
+               services.AddScoped<IStadiumsService, StadiumsService>();
+               services.AddScoped<ICoachesService, CoachesService>();
+               services.AddScoped<IMatchesService, MatchesService>();
+               services.AddScoped<INewsService, NewsService>();
+               services.AddScoped<ICountriesService, CountriesService>();
                services.AddScoped<IUserService, UserService>();
                services.AddHttpContextAccessor();
 

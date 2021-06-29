@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FootballInfoApp.API.Services.Interfaces
 {
-     public interface IMatchService
+     public interface IMatchesService
      {
           Task<Match> GetMatchById(int id);
           Task<Match> GetLastMatchByTeamId(int id);
